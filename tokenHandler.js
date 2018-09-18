@@ -1,35 +1,35 @@
 'use strict';
 const jwt = require('jsonwebtoken');
 
-// need to implement the verify function
-const JWT_PRIVATE_KEY = process.env.JWT_PRIVATE_KEY;
-
-function getPayload(token) {
-  const payload = jwt.decode(token);
-  return payload;
-}
-
-module.exports = (token, resolve, reject, role) => {
+module.exports = (token, resolve, reject, role,
+  JWT_PRIVATE_KEY, roleAttName) => {
   if (token) {
     const split = token.split(' ');
 
     if (split.length === 2) {
       token = split[1];
     }
-  }
-  if (token) {
-    try {
-      const payload = getPayload(token);
-      if (payload.user_type == role) {
-        resolve(null, true);
-      } else {
-        reject();
-      }
-    } catch (err) {
-      console.log('error', err);
+    if (token) {
+      jwt.verify(token, JWT_PRIVATE_KEY, (err, payload)=>{
+        if (err) {
+          // decode error, wrong private key
+          console.log('error', err);
+          return reject();
+        }
+        const customRole = payload[roleAttName];
+        if (customRole == role) {
+          resolve(null, true);
+        } else {
+          // not authorized
+          reject();
+        }
+      });
+    } else {
+      // invalid header
       reject();
     }
   } else {
+    // invalid token
     reject();
   }
 };
