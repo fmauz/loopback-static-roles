@@ -18,8 +18,9 @@ module.exports = function(app, options) {
 
     const req = ctx.remotingContext.req;
 
-    let token = req.headers.Authorization || req.headers.authorization;
-
+    let token = req.headers.Authorization ||
+      req.headers.authorization ||
+      req.query.access_token;
     handleToken(token, cb, reject, role, JWT_PRIVATE_KEY, roleAttName);
   }
 
