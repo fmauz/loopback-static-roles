@@ -18,7 +18,7 @@ module.exports = (token, resolve, reject, role,
           console.log('error', err);
           return reject();
         }
-        const customRole = payload[roleAttName];
+        const customRole = payload.params[roleAttName];
         if (customRole == role) {
           resolve(null, true);
         } else {
