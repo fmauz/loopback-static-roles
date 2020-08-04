@@ -19,7 +19,7 @@ module.exports = function(app, options) {
     const req = ctx.remotingContext.req;
 
     let appToken = req.headers["x-api-token"]
-    if( appToken && appToken === process.env["X-API-TOKEN"] ) {
+    if( appToken && appToken === process.env["X_API_TOKEN"] ) {
       cb(null, true)
     } else {
       let token = req.headers.Authorization ||
