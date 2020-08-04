@@ -1,18 +1,18 @@
 {
-  "name": "loopback-static-roles",
+  "name": "loopback-static-roles-v2",
   "version": "1.4.1",
   "description": "Loopback acl with static roles",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "eduardolagoeiro",
+  "author": "fabiomartins",
   "license": "ISC",
   "dependencies": {
     "jsonwebtoken": "^8.3.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/eduardolagoeiro/loopback-static-roles.git"
+    "url": "https://github.com/fmauz/loopback-static-roles.git"
   }
 }
