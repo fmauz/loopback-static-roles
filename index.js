@@ -18,10 +18,16 @@ module.exports = function(app, options) {
 
     const req = ctx.remotingContext.req;
 
-    let token = req.headers.Authorization ||
-      req.headers.authorization ||
-      req.query.access_token;
-    handleToken(token, cb, reject, role, JWT_PRIVATE_KEY, roleAttName);
+    let appToken = req.headers["x-api-token"]
+    if( appToken && appToken === process.env["X-API-TOKEN"] ) {
+      cb(null, true)
+    } else {
+      let token = req.headers.Authorization ||
+        req.headers.authorization ||
+        req.query.access_token;
+  
+      handleToken(token, cb, reject, role, JWT_PRIVATE_KEY, roleAttName);
+    }
   }
 
   if (options.roles) {

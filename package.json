@@ -1,6 +1,6 @@
 {
   "name": "loopback-static-roles",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Loopback acl with static roles",
   "main": "index.js",
   "scripts": {
